@@ -1,0 +1,26 @@
+﻿{
+  "bindings": [
+    {
+      "authLevel": "anonymous",
+      "name": "req",
+      "type": "httpTrigger",
+      "direction": "in",
+      "route": "orders/{id}"
+    },
+    {
+      "type": "table",
+      "name": "orderEntity",
+      "tableName": "orders",
+      "partitionKey": "Orders",
+      "rowKey": "{id}",
+      "connection": "AzureWebJobsDashboard",
+      "direction": "in"
+    },
+    {
+      "name": "res",
+      "type": "http",
+      "direction": "out"
+    }
+  ],
+  "disabled": false
+}
