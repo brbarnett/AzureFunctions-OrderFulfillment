@@ -5,7 +5,6 @@ using BB.OrderFulfillment.Domain.Models;
 using BB.OrderFulfillment.Orders;
 
 public static async Task Run(
-    HttpRequestMessage req,
     string ordersQueueItem,
     IAsyncCollector<StorageModels.OrderEntity> ordersTable,
     TraceWriter log)
