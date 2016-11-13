@@ -26,8 +26,8 @@ public static async Task Run(
         {
             PartitionKey = "Orders",
             RowKey = order.Id,
-            Order = order,
-            ExternalOrder = rawOrder
+            SerializedOrder = JsonConvert.SerializeObject(order),
+            SerializedExternalOrder = ordersQueueItem
         });
     }
     catch (Exception ex)

@@ -1,13 +1,11 @@
-﻿using BB.OrderFulfillment.Domain.Models;
-using BB.OrderFulfillment.Orders.ExternalModels;
-using Microsoft.WindowsAzure.Storage.Table;
+﻿using Microsoft.WindowsAzure.Storage.Table;
 
 namespace BB.OrderFulfillment.Orders.StorageModels
 {
     public class OrderEntity : TableEntity
     {
-        public ECommerceOrder ExternalOrder { get; set; }
+        public string SerializedExternalOrder { get; set; }
 
-        public Order Order { get; set; }
+        public string SerializedOrder { get; set; }
     }
 }
