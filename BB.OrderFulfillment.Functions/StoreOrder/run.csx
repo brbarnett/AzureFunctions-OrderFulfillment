@@ -1,22 +1,28 @@
-﻿#r "../bin/BB.OrderFulfillment.Domain.dll"
+﻿#r "Microsoft.WindowsAzure.Storage"
+#r "Newtonsoft.Json"
+#r "../bin/BB.OrderFulfillment.Domain.dll"
 #r "../bin/BB.OrderFulfillment.Orders.dll"
 
+using Newtonsoft.Json;
+
 using BB.OrderFulfillment.Domain.Models;
-using BB.OrderFulfillment.Orders;
+using BB.OrderFulfillment.Orders.ExternalModels;
+using BB.OrderFulfillment.Orders.Services;
+using BB.OrderFulfillment.Orders.StorageModels;
 
 public static async Task Run(
     string ordersQueueItem,
-    IAsyncCollector<StorageModels.OrderEntity> ordersTable,
+    IAsyncCollector<OrderEntity> ordersTable,
     TraceWriter log)
 {
     try
     {
-        ExternalModels.ECommerceOrder rawOrder = JsonConvert.DeserializeObject<ExternalModels.ECommerceOrder>(ordersQueueItem);
+        ECommerceOrder rawOrder = JsonConvert.DeserializeObject<ECommerceOrder>(ordersQueueItem);
 
-        Services.IOrderMapper orderMapper = new Services.OrderMapper();
+        IOrderMapper orderMapper = new OrderMapper();
         Order order = orderMapper.Map(rawOrder);
 
-        await ordersTable.AddAsync(new StorageModels.OrderEntity
+        await ordersTable.AddAsync(new OrderEntity
         {
             PartitionKey = "Orders",
             RowKey = order.Id,

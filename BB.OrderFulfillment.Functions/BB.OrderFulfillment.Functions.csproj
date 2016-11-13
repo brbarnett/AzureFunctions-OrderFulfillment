@@ -59,6 +59,10 @@
       <Project>{5bc46753-e470-49cc-adaf-b457a30f5632}</Project>
       <Name>BB.OrderFulfillment.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BB.OrderFulfillment.Orders\BB.OrderFulfillment.Orders.csproj">
+      <Project>{55220e02-79fe-415d-b81a-d21f79d5f95f}</Project>
+      <Name>BB.OrderFulfillment.Orders</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
