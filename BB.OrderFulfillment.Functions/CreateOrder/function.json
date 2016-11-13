@@ -1,0 +1,22 @@
+﻿{
+  "bindings": [
+    {
+      "type": "httpTrigger",
+      "direction": "in",
+      "webHookType": "genericJson",
+      "name": "req",
+      "route": "orders/ecommerce",
+      "methods": [
+        "post"
+      ]
+    },
+    {
+      "type": "queue",
+      "name": "ordersQueue",
+      "queueName": "orders-raw",
+      "connection": "AzureWebJobsStorage",
+      "direction": "out"
+    }
+  ],
+  "disabled": false
+}

@@ -4,7 +4,7 @@ namespace BB.OrderFulfillment.Domain.Models
 {
     public class Sku
     {
-        public string Name { get; set; }
+        public string Id { get; set; }
 
         public decimal Price { get; set; }
 
@@ -12,13 +12,13 @@ namespace BB.OrderFulfillment.Domain.Models
 
         public Sku() { }
 
-        public Sku(string name, decimal price, int quantity)
+        public Sku(string id, decimal price, int quantity)
         {
-            if(String.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+            if(String.IsNullOrEmpty(id)) throw new ArgumentNullException(nameof(id));
             if(price < 0) throw new ArgumentOutOfRangeException(nameof(price));
             if(quantity < 0) throw new ArgumentNullException(nameof(quantity));
 
-            this.Name = name;
+            this.Id = id;
             this.Price = price;
             this.Quantity = quantity;
         }

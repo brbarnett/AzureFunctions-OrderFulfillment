@@ -45,9 +45,19 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="CreateOrder\" />
-    <Folder Include="StoreOrder\" />
+    <Content Include="CreateOrder\function.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CreateOrder\run.csx" />
+    <Content Include="StoreOrder\run.csx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BB.OrderFulfillment.Domain\BB.OrderFulfillment.Domain.csproj">
+      <Project>{5bc46753-e470-49cc-adaf-b457a30f5632}</Project>
+      <Name>BB.OrderFulfillment.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
