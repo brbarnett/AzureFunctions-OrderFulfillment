@@ -24,7 +24,11 @@ public static async Task Run(
         Order order = orderMapper.Map(rawOrder);
 
         OrderEntity existingOrder = queryableOrdersTable.Where(p => p.RowKey == order.Id).SingleOrDefault();
-        if (existingOrder != null) return;
+        if (existingOrder != null)
+        {
+            log.Info($"Record already exists in the table. Exiting...");
+            return;
+        }
 
         await ordersTable.AddAsync(new OrderEntity
         {
