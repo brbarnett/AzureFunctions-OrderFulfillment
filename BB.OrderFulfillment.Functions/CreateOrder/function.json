@@ -5,7 +5,7 @@
       "direction": "in",
       "webHookType": "genericJson",
       "name": "req",
-      "route": "orders/ecommerce",
+      "route": "orders/create",
       "methods": [
         "post"
       ]
