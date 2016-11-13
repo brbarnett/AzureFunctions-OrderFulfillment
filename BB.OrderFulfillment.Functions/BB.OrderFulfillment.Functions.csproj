@@ -52,6 +52,7 @@
   <ItemGroup>
     <None Include="CreateOrder\run.csx" />
     <Content Include="StoreOrder\run.csx" />
+    <Content Include="StoreOrder\function.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BB.OrderFulfillment.Domain\BB.OrderFulfillment.Domain.csproj">

@@ -1,0 +1,19 @@
+﻿{
+  "bindings": [
+    {
+      "name": "ordersQueueItem",
+      "type": "queueTrigger",
+      "direction": "in",
+      "queueName": "orders-raw",
+      "connection": "AzureWebJobsStorage"
+    },
+    {
+      "type": "table",
+      "name": "ordersTable",
+      "tableName": "orders",
+      "connection": "AzureWebJobsStorage",
+      "direction": "out"
+    }
+  ],
+  "disabled": false
+}

@@ -6,22 +6,31 @@ using BB.OrderFulfillment.Orders;
 
 public static async Task Run(
     HttpRequestMessage req,
-    IAsyncCollector<Order> ordersQueue,
+    string ordersQueueItem,
+    IAsyncCollector<StorageModels.OrderEntity> ordersTable,
     TraceWriter log)
 {
-    string rawOrder = await req.Content.ReadAsStringAsync();
-    log.Info($"Received new order: {rawOrder}");
-
     try
     {
-        ExternalModels.ECommerceOrder postedOrder = JsonConvert.DeserializeObject<ExternalModels.ECommerceOrder>(message);
-        
-        await ordersQueue.AddAsync(orderQueueMessage);
+        ExternalModels.ECommerceOrder rawOrder = JsonConvert.DeserializeObject<ExternalModels.ECommerceOrder>(ordersQueueItem);
+
+        Services.IOrderMapper orderMapper = new Services.OrderMapper();
+        Order order = orderMapper.Map(rawOrder);
+
+        await ordersTable.AddAsync(new StorageModels.OrderEntity
+        {
+            PartitionKey = "Orders",
+            RowKey = order.Id,
+            Order = order,
+            ExternalOrder = rawOrder
+        });
     }
     catch (Exception ex)
     {
         log.Info($"Error receiving data: {ex}");
 
-        // handle exception
+        // handle exception for further processing. consider handling different exceptions separately,
+        // where some might cause retries (as thrown exceptions, which will cause a requeue) and others 
+        // might store poisonous messages to a new {queueName}-error queue
     }
 }
