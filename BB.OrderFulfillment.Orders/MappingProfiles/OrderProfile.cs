@@ -10,8 +10,8 @@ namespace BB.OrderFulfillment.Orders.MappingProfiles
         {
             base.CreateMap<ECommerceOrder, Order>()
                 .ForMember(dest => dest.Id, o => o.MapFrom(src => src.OrderNumber.ToString()))
-                .ForMember(dest => dest.CustomerName, o => o.MapFrom(src => src.OrderNumber))
-                .ForMember(dest => dest.CustomerAddress, o => o.MapFrom(src => src.OrderNumber))
+                .ForMember(dest => dest.CustomerName, o => o.MapFrom(src => src.Customer))
+                .ForMember(dest => dest.CustomerAddress, o => o.MapFrom(src => src.ShipToAddress))
                 .ForMember(dest => dest.Skus, o => o.MapFrom(src => src.SoldItems));
 
             base.CreateMap<ECommerceSku, Sku>()
