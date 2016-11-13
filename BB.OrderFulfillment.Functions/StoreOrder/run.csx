@@ -12,6 +12,7 @@ using BB.OrderFulfillment.Orders.StorageModels;
 
 public static async Task Run(
     string ordersQueueItem,
+    IQueryable<OrderEntity> queryableOrdersTable,
     IAsyncCollector<OrderEntity> ordersTable,
     TraceWriter log)
 {
@@ -21,6 +22,9 @@ public static async Task Run(
 
         IOrderMapper orderMapper = new OrderMapper();
         Order order = orderMapper.Map(rawOrder);
+
+        OrderEntity existingOrder = queryableOrdersTable.Where(p => p.RowKey == order.Id).SingleOrDefault();
+        if (existingOrder != null) return;
 
         await ordersTable.AddAsync(new OrderEntity
         {

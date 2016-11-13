@@ -8,6 +8,13 @@
       "connection": "AzureWebJobsStorage"
     },
     {
+      "name": "queryableOrdersTable",
+      "type": "table",
+      "connection": "AzureWebJobsStorage",
+      "tableName": "orders",
+      "direction": "in"
+    },
+    {
       "type": "table",
       "name": "ordersTable",
       "tableName": "orders",
